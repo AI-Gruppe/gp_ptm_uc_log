@@ -166,7 +166,7 @@ int main(int argc, char** argv) {
       [&](std::chrono::system_clock::time_point recv_time, uc_log::detail::LogEntry const& e) {
           std::size_t const terminal_width = []() -> std::size_t {
               struct winsize w {};
-              if(-1 == ::ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) || w.ws_col > 1024) {
+              if(-1 == ::ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) || w.ws_col == 0 || w.ws_col > 1024) {
                   return 120;
               }
               return w.ws_col;
